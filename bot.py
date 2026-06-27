@@ -469,7 +469,7 @@ async def poll(ctx, *, text: str):
     parts = [p.strip() for p in text.split("|")]
     question, options = parts[0], parts[1:] if len(parts) > 1 else ["✅ Yes", "❌ No"]
     emojis = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣","🔟"]
-    desc = "\n".join(f"{emojis[i]} {opt}" for i, o
+    desc = "\n".join(f"{emojis[i]} {opt}" for i, opt in enumerate(options))
 @tasks.loop(minutes=1)
 async def check_mutes():
     now = datetime.datetime.utcnow().timestamp()
