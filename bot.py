@@ -488,7 +488,7 @@ async def check_mutes():
         save_data(DATA)
 
 # ── HELP ────────────────────────────────────────────
-@bot.command(name="help")
+@bot.command(name="helpcmd")
 async def help_cmd(ctx):
     embed = discord.Embed(title="🤖 Callmest — Commands", color=0x5865F2)
     embed.add_field(name="🛡️ Mod", value="`!kick` `!ban` `!unban` `!mute` `!unmute` `!warn` `!warns` `!clearwarn` `!purge` `!slowmode` `!lock` `!unlock`", inline=False)
