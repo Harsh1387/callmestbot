@@ -467,3 +467,11 @@ async def leaderboard(ctx):
 async def coinflip(ctx):
     result = random.choice(['Heads 🪙', 'Tails 🪙'])
     await ctx.send(f"**{result}**")
+
+# ── RUN ──────────────────────────────────────────────
+try:
+    bot.run(DISCORD_TOKEN)
+except Exception as e:
+    print(f"ERROR: {e}", flush=True)
+    import traceback
+    traceback.print_exc()
