@@ -89,11 +89,8 @@ async def on_message(message):
             break
 
     if message.channel.id in DATA["ai_channels"]:
-        async with message.channel.typing():
-            reply = await ask_ai(message.channel.id, message.author.display_name, message.content)
-            await message.channel.send(reply)
+        await message.channel.send("AI is temporarily disabled.")
         return
-
     if message.content.startswith(PREFIX):
         cmd_name = message.content[len(PREFIX):].split()[0].lower()
         if cmd_name in DATA["custom_commands"]:
