@@ -69,7 +69,8 @@ async def ask_ai(channel_id, username, prompt, system=None):
                     "messages": history,
                 },
             )
-        reply = r.json()["content"][0]["text"]
+        resp = r.json()
+reply = resp["content"][0]["text"] if "content" in resp else str(resp)
         history.append({"role": "assistant", "content": reply})
         return reply
     except Exception as e:
