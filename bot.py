@@ -41,7 +41,7 @@ DATA = load_data()
 # ── BOT SETUP ───────────────────────────────────────
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=PREFIX, intents=intents, help_command=None)
-
+bot.remove_command("help")
 # Stores per-channel conversation history for AI
 ai_history = {}
 
