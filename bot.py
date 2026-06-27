@@ -43,39 +43,6 @@ intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=PREFIX, intents=intents, help_command=None)
 ai_history = {}
 
-# ── AI HELPER ───────────────────────────────────────
-async def ask_ai(channel_id, username, prompt, system=None):
-    history = ai_history.setdefault(channel_id, [])
-    history.append({"role": "user", "content": f"{username}: {prompt}"})
-    if len(history) > 20:
-        history.pop(0)
-    sys_prompt = system or (
-        "You are Callmest, a friendly and helpful Discord bot. "
-        "Keep replies concise (under 2000 chars). Use Discord markdown when helpful."
-    )
-    try:
-        async with httpx.AsyncClient(timeout=30) as client:
-            r = await client.post(
-                "https://api.anthropic.com/v1/messages",
-                headers={
-                    "x-api-key": ANTHROPIC_KEY,
-                    "anthropic-version": "2023-06-01",
-                    "content-type": "application/json",
-                },
-                json={
-                    "model": "claude-sonnet-4-6",
-                    "max_tokens": 600,
-                    "system": sys_prompt,
-                    "messages": history,
-                },
-            )
-        resp = r.json()
-        reply = resp["content"][0]["text"] if "content" in resp else str(resp)
-        history.append({"role": "assistant", "content": reply})
-        return reply
-    except Exception as e:
-        return f"AI error: {e}"
-
 # ── EVENTS ──────────────────────────────────────────
 @bot.event
 async def on_ready():
