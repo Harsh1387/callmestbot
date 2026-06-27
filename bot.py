@@ -8,7 +8,7 @@ import datetime
 import random
 import httpx
 from pathlib import Path
-
+from aiohttp import web
 # ── CONFIG ──────────────────────────────────────────
 DISCORD_TOKEN  = os.environ.get("DISCORD_TOKEN")
 ANTHROPIC_KEY  = os.environ.get("ANTHROPIC_KEY")
